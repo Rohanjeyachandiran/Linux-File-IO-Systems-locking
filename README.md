@@ -1,4 +1,5 @@
-# EX07 Linux-File-IO-Systems-locking
+# Linux-File-IO-Systems-locking
+Ex07-Linux File-IO Systems-locking
 # AIM:
 To Write a C program that illustrates files copying and locking
 
@@ -18,9 +19,10 @@ Execute the C Program for the desired output.
 
 # PROGRAM:
 
-## i)To Write a C program that illustrates files copying 
+## 1.To Write a C program that illustrates files copying 
 
 ```
+
 #include <unistd.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -35,10 +37,24 @@ out = open("file.out", O_WRONLY|O_CREAT, S_IRUSR|S_IWUSR);
 while((nread = read(in,block,sizeof(block))) > 0)
 write(out,block,nread);
 exit(0);}
+
 ```
 
+## OUTPUT
 
-## ii)To Write a C program that illustrates files locking
+```
+$ gcc -o filecopy.o filecopy.c
+$./filecopy.o
+$ ls -l file.out
+
+-rwxr-xr-x    1 root     root         18352 Apr 17 14:08 filecopy.o
+
+$ diff filecopy.c file.out
+
+
+```
+
+## 2.To Write a C program that illustrates files locking
 
 ```
 #include <fcntl.h>
@@ -78,15 +94,36 @@ getchar();
 close (fd);
 return 0;
 }
+
 ```
 
 
-## OUTPUT:
-# i) FILECOPYING:
-![alt text](flcp.png)
 
-# ii) FILELOCKING:
-![alt text](lock.c.png)
+## OUTPUT
+
+```
+
+$ gcc -o lock.o lock.c
+$ ./lock.o tricky.txt
+
+opening tricky.txt
+
+
+
+```
+
+```
+
+$ lslocks
+COMMAND         PID  TYPE SIZE MODE  M START END PATH
+(unknown)        54 FLOCK      WRITE 0     0   0 /run...
+
+```
+
+
+
 
 # RESULT:
+
 The programs are executed successfully.
+
